@@ -1,6 +1,6 @@
 # [MyVaccination](https://myvaccination.pages.dev)
 
-Hi everyone, this is dashboard to see vaccination data in malaysia.
+Hi everyone, I designed and made this dashboard to display vaccination data in malaysia.
 
 The data is supplied by my own [backend](https://github.com/vincenth19/myvaccine-backend).
 
