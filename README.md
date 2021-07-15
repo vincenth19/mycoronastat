@@ -1,4 +1,4 @@
-# [MyVaccination](https://myvaccination.pages.dev)
+# [MyCoronaStat](https://mycoronastat.pages.dev)
 
 Hi everyone, I designed and made this dashboard to display vaccination data in malaysia.
 
