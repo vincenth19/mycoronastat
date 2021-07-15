@@ -2,7 +2,7 @@
 
 Hi everyone, I designed and made this dashboard to display vaccination data in malaysia.
 
-The data is supplied by my own [backend](https://github.com/vincenth19/myvaccine-backend).
+The vaccination data is supplied by my own [backend](https://github.com/vincenth19/myvaccine-backend) and the cases is taken from [Disease.sh API](https://disease.sh/docs/)
 
 # How to Run This?
 
