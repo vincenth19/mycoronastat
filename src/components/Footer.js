@@ -13,22 +13,26 @@ import {
   Link,
   Divider,
   Flex,
+  useColorModeValue,
 } from '@chakra-ui/react';
 
 export default function Footer() {
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const textColor = useColorModeValue('gray.500', 'gray.300');
+  const linkColor = useColorModeValue('blue.500', 'blue.300');
+  const footerBg = useColorModeValue('#ffffff', '#222040');
   return (
     <>
       <Flex
         mt={8}
         py={5}
         width="full"
-        borderTopColor="gray.200"
+        borderTopColor={textColor}
         borderTopWidth="1px"
         justify="space-between"
         fontSize={['sm', 'md']}
       >
-        <Flex wrap="wrap" color="gray.500">
+        <Flex wrap="wrap" color={textColor}>
           <Text>Designed & created by </Text>
           <Link
             target="_blank"
@@ -57,20 +61,22 @@ export default function Footer() {
         scrollBehavior="inside"
       >
         <ModalOverlay />
-        <ModalContent>
+        <ModalContent bg={footerBg}>
           <ModalHeader>Data Source</ModalHeader>
           <ModalCloseButton />
           <ModalBody>
             <VStack align="left">
-              <Text color="gray.500">COVID-19 cases, recovery, and death:</Text>
-              <Link href="https://disease.sh/docs/" color="blue.500">
+              <Text color={textColor}>
+                COVID-19 cases, recovery, and death:
+              </Text>
+              <Link href="https://disease.sh/docs/" color={linkColor}>
                 API from disease.sh
               </Link>
               <Divider />
-              <Text color="gray.500">Vaccination: </Text>
+              <Text color={textColor}>Vaccination: </Text>
               <Link
                 href="https://github.com/vincenth19/myvaccine-backend"
-                color="blue.500"
+                color={linkColor}
               >
                 My own APIs. Data is taken from CITF-Malaysia
               </Link>
