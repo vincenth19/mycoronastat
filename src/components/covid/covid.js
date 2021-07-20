@@ -9,6 +9,8 @@ import {
   StatNumber,
   StatArrow,
   StatLabel,
+  useColorModeValue,
+  useColorMode,
 } from '@chakra-ui/react';
 import { RiVirusLine, RiHeartAddFill } from 'react-icons/ri';
 import { GiTombstone } from 'react-icons/gi';
@@ -18,12 +20,17 @@ export default function Covid() {
   const [caseData, setCaseData] = useState();
   const [apiError, setApiError] = useState('');
   const [modifiedData, setModifiedData] = useState();
+  const bg = useColorModeValue('white', '#36326f');
+  const border = useColorModeValue('#E5E4FB', '#66508c');
+  const labelText = useColorModeValue('gray.500', 'gray.100');
+
   const dateOptions = {
     weekday: 'short',
     year: 'numeric',
     month: 'long',
     day: 'numeric',
   };
+
   useEffect(async () => {
     await fetch('https://disease.sh/v3/covid-19/countries/MYS?strict=true')
       .then(res => {
@@ -53,7 +60,7 @@ export default function Covid() {
           total: caseData.cases,
           today: caseData.todayCases,
           percentage: (caseData.todayCases / caseData.cases) * 100,
-          arrowColor: 'red.600',
+          arrowColor: 'red.400',
         },
         {
           title: 'Recovery',
@@ -63,7 +70,7 @@ export default function Covid() {
           total: caseData.recovered,
           today: caseData.todayRecovered,
           percentage: (caseData.todayRecovered / caseData.recovered) * 100,
-          arrowColor: 'teal.600',
+          arrowColor: 'teal.400',
         },
         {
           title: 'Death',
@@ -73,7 +80,7 @@ export default function Covid() {
           total: caseData.deaths,
           today: caseData.todayDeaths,
           percentage: (caseData.todayDeaths / caseData.deaths) * 100,
-          arrowColor: 'red.600',
+          arrowColor: 'red.400',
         },
       ]);
     }
@@ -81,7 +88,7 @@ export default function Covid() {
 
   if (apiError) {
     return (
-      <Box border="2px" borderColor="#E5E4FB" borderRadius="10px" bg="white">
+      <Box border="2px" borderColor="#E5E4FB" borderRadius="10px">
         <Box align="center">
           <Text>There is an issue when fetching the data from the API.</Text>
           <Text>Error: {apiError}</Text>
@@ -93,10 +100,10 @@ export default function Covid() {
       <Box mt={3}>
         <>
           <Flex wrap="wrap" justify="space-between" alignItems="center">
-            <Text fontWeight="bold" color="gray.600">
+            <Text fontWeight="bold" color={labelText}>
               COVID-19 Data
             </Text>
-            <Flex color="gray.500" fontSize="1rem">
+            <Flex color="gray.500" fontSize="1rem" color={labelText}>
               Last Updated:
               <Text ml={3} fontWeight="semibold">
                 {modifiedData ? (
@@ -112,10 +119,10 @@ export default function Covid() {
           </Flex>
           <Box
             border="2px"
-            borderColor="#E5E4FB"
+            borderColor={border}
             borderRadius="10px"
-            bg="white"
             mt={3}
+            bg={bg}
           >
             {modifiedData ? (
               <SimpleGrid
@@ -142,7 +149,7 @@ export default function Covid() {
                           <Flex py={2} px={3} flexGrow={[0, 1]}>
                             <Stat>
                               <StatLabel>
-                                <Text color="gray.500" fontWeight="semibold">
+                                <Text color={labelText} fontWeight="semibold">
                                   {data.title}
                                 </Text>
                               </StatLabel>
@@ -188,7 +195,7 @@ export default function Covid() {
                 </Flex>
               </SimpleGrid>
             ) : (
-              <Flex justifyContent="center" alignItems="center" mt={5}>
+              <Flex justifyContent="center" alignItems="center" my={5}>
                 <Spinner
                   color="#736DD9"
                   size="xl"

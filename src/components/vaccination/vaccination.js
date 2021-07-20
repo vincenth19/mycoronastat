@@ -9,7 +9,7 @@ import {
   StatNumber,
   StatArrow,
   StatLabel,
-  Progress,
+  useColorModeValue,
 } from '@chakra-ui/react';
 import { RiSyringeFill } from 'react-icons/ri';
 import CountUp from 'react-countup';
@@ -18,6 +18,9 @@ export default function Vaccination() {
   const [nationalData, setNationalData] = useState();
   const [apiError, setApiError] = useState('');
   const [modifiedData, setModifiedData] = useState();
+  const bg = useColorModeValue('white', '#36326f');
+  const border = useColorModeValue('#E5E4FB', '#66508c');
+  const labelText = useColorModeValue('gray.500', 'gray.100');
   const dateOptions = {
     weekday: 'short',
     year: 'numeric',
@@ -57,7 +60,7 @@ export default function Vaccination() {
           today: nationalData.update_total,
           percentage:
             (nationalData.update_total / nationalData.total_total) * 100,
-          arrowColor: 'teal.600',
+          arrowColor: 'teal.400',
         },
         {
           title: '1st Dose',
@@ -73,7 +76,7 @@ export default function Vaccination() {
           today: nationalData.update_dose1,
           percentage:
             (nationalData.update_dose1 / nationalData.total_dose1) * 100,
-          arrowColor: 'teal.600',
+          arrowColor: 'teal.400',
         },
         {
           title: '2nd Dose',
@@ -89,7 +92,7 @@ export default function Vaccination() {
           today: nationalData.update_dose2,
           percentage:
             (nationalData.update_dose2 / nationalData.total_dose2) * 100,
-          arrowColor: 'teal.600',
+          arrowColor: 'teal.400',
         },
       ]);
     }
@@ -97,11 +100,14 @@ export default function Vaccination() {
 
   return (
     <Box mt={5}>
-      <Flex wrap="wrap" justify="space-between" alignItems="center">
-        <Text fontWeight="bold" color="gray.600">
-          Vaccination Progress
-        </Text>
-        <Flex color="gray.500" fontSize="1rem">
+      <Flex
+        wrap="wrap"
+        justify="space-between"
+        alignItems="center"
+        color={labelText}
+      >
+        <Text fontWeight="bold">Vaccination Progress</Text>
+        <Flex color="gray.500" fontSize="1rem" color={labelText}>
           Last Updated:
           <Text ml={3} fontWeight="semibold">
             {modifiedData ? (
@@ -112,13 +118,7 @@ export default function Vaccination() {
           </Text>
         </Flex>
       </Flex>
-      <Box
-        border="2px"
-        borderColor="#E5E4FB"
-        borderRadius="10px"
-        bg="white"
-        mt={3}
-      >
+      <Box border="2px" borderColor={border} borderRadius="10px" bg={bg} mt={3}>
         {modifiedData ? (
           <>
             <SimpleGrid
@@ -150,7 +150,7 @@ export default function Vaccination() {
                         <Flex py={2} px={3} flexGrow={[0, 1]}>
                           <Stat>
                             <StatLabel>
-                              <Text color="gray.500" fontWeight="semibold">
+                              <Text color={labelText} fontWeight="semibold">
                                 {data.title}
                               </Text>
                             </StatLabel>
